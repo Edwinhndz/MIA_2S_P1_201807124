@@ -1,0 +1,90 @@
+------------------------main.go-------------------------------------
+
+
+type Comando struct {
+    Comando string `json:"comando"`
+}
+
+
+func leerComando(w http.ResponseWriter, r *http.Request) {
+	var newComando Comando
+	var internalComando Comando
+	var newRespuesta Respuesta
+
+	// Leer el cuerpo de la solicitud
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		newRespuesta.ResponseBack = "Inserte un comando válido"
+		newRespuesta.Error = true
+		json.NewEncoder(w).Encode(newRespuesta)
+		return
+	}
+
+	// Mostrar lo que se recibió
+	fmt.Println("Cuerpo de la solicitud:", string(reqBody))
+
+	// Desempaquetar el JSON externo
+	err = json.Unmarshal(reqBody, &newComando)
+	if err != nil {
+		newRespuesta.ResponseBack = "Error en el formato del comando"
+		newRespuesta.Error = true
+		json.NewEncoder(w).Encode(newRespuesta)
+		return
+	}
+
+	// Desempaquetar el JSON interno
+	err = json.Unmarshal([]byte(newComando.Comando), &internalComando)
+	if err != nil {
+		newRespuesta.ResponseBack = "Error en el formato del comando interno"
+		newRespuesta.Error = true
+		json.NewEncoder(w).Encode(newRespuesta)
+		return
+	}
+
+	// Procesar el comando
+	newRespuesta.ResponseBack = filesystem.DividirComando(internalComando.Comando)
+	fmt.Println("Respuesta del comando:", newRespuesta.ResponseBack)
+
+	// Enviar la respuesta
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(newRespuesta)
+}
+
+
+--------------------Analisis.jsx--------------------------
+
+export const analisis = async (value) => {
+    console.log("Valor de comando antes de enviar:", value); // Verifica que esto sea una cadena de texto simple
+    const payload = { comando: value.trim() };
+    console.log("Payload enviado al backend:", payload);
+    const { data } = await instance.post('command', payload);
+    return data;
+}
+
+
+-------------Editor.jsx--------------------------
+
+const handlerChangeEditor = (newValue) => {
+        props.setCodigo(newValue);
+    }
+
+
+
+
+---------------------index.jsx---------------------
+
+
+const handlerClick = async () => {
+        if (value === "") {
+            alert("NO PUEDES ENVIAR UN COMANDO VACIO");
+            return;
+        }
+        Service.analisis(value)
+            .then((res) => {
+                setResponse(res.respuesta);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
