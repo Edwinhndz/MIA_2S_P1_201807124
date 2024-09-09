@@ -1,5 +1,6 @@
 package filesystem
 
+
 import (
 	"encoding/binary"
 	"fmt"
@@ -279,7 +280,7 @@ func ReporteDisk(idValor string, pathValor string) {
 	Dot += "\"];\n}"
 
 	//Quitar la extension al archivo (pdf, etc, )
-
+	
 	//Crear el archivo .dot
 	DotName := "Reportes/ReporteDisk.dot"
 	archivoDot, err := os.Create(DotName)
@@ -303,6 +304,7 @@ func ReporteDisk(idValor string, pathValor string) {
 
 	fmt.Println("Reporte generado con exito")
 	//se escribe en el front
+	
 
 }
 
@@ -506,8 +508,8 @@ func ReporteSB(idValor string, pathValor string) {
 	Dot := "digraph grid {bgcolor=\"slategrey\" label=\" Reporte SuperBlock \"layout=dot "
 	Dot += "labelloc = \"t\"edge [weigth=1000 style=dashed color=red4 dir = \"both\" arrowtail=\"open\" arrowhead=\"open\"]"
 	Dot += "a0[shape=none, color=lightgrey, label=<\n<TABLE cellspacing=\"3\" cellpadding=\"2\" style=\"rounded\" >\n"
-	//se le agrega el nombre del disco segun la ruta a la tabla
-	Dot += "<TR><TD bgcolor=\"lightgrey\">Disco</TD><TD>" + MountActual.Path + "</TD></TR>\n"
+	//se le agrega el nombre del disco segun la ruta a la tabla	
+	Dot += "<TR><TD bgcolor=\"lightgrey\">Disco</TD><TD>" + MountActual.Path+ "</TD></TR>\n"
 
 	Dot += "<TR><TD bgcolor=\"lightgrey\">s_filesystem_type</TD><TD>" + strconv.Itoa(int(sb.S_filesystem_type)) + "</TD></TR>\n"
 	Dot += "<TR><TD bgcolor=\"lightgrey\">s_inodes_count</TD><TD>" + strconv.Itoa(int(sb.S_inodes_count)) + "</TD></TR>\n"
@@ -559,5 +561,7 @@ func ReporteSB(idValor string, pathValor string) {
 	}
 
 	fmt.Println("Reporte sb generado con exito")
+	
 
+	
 }

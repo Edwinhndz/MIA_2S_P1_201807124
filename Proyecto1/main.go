@@ -32,7 +32,7 @@ type allTasks []User
 var tasks = allTasks{
 	{
 		Carnet: 201807124,
-		Nombre: "Edwin Eduardo Lopez Henandez",
+		Nombre: "Edwin Eduardo Lopez Hernandez",
 	},
 }
 
@@ -92,7 +92,7 @@ func indexRoute(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	// Rutas
-	fmt.Println("Edwin Lopez MIA Proyecto 1")
+	fmt.Println("MIA Edwin Lopez")
 	router := mux.NewRouter().StrictSlash(true)
 	// Endpoints
 	router.HandleFunc("/", indexRoute)

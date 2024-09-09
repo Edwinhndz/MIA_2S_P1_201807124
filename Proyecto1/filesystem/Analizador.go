@@ -2,6 +2,7 @@ package filesystem
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -56,17 +57,19 @@ func AnalizarComando(comando string) string {
 				respuesta += AnalizarComando(comandoSeparadoString)
 				return respuesta
 			} else if valor == "rmdisk" {
+
 				fmt.Println("------------------|Comando rmdisk|------------------")
-				respuesta += "Ejecutando rmdisk\n"
+				respuesta += "------------------|Comando rmdisk|------------------\n"
 				//Analizar el comando rmdisk
-				//respuesta += AnalizarRmdisk(comandoSeparado)
+				respuesta += AnalizarRmdisk(&comandoSeparado)
 				//Pasar a string el comando separado
-				//comandoSeparadoString := strings.Join(comandoSeparado, " ")
-				//respuesta += AnalizarComando(comandoSeparadoString)
-				//return respuesta
+				comandoSeparadoString := strings.Join(comandoSeparado, " ")
+				respuesta += AnalizarComando(comandoSeparadoString)
+				return respuesta
+
 			} else if valor == "fdisk" {
 				fmt.Println("------------------|Comando fdisk|------------------")
-				respuesta += "------------------|Comando fdisk------------------\n"
+				respuesta += "------------------|Comando fdisk|------------------\n"
 				//Analizar el comando fdisk
 				respuesta += AnalizarFdisk(&comandoSeparado)
 				//Pasar a string el comando separado
@@ -93,7 +96,7 @@ func AnalizarComando(comando string) string {
 				return respuesta
 			} else if valor == "login" {
 				fmt.Println("------------------|Comando login|------------------")
-				respuesta += "------------------|Comando login|------------------\nParametros:\n"	
+				respuesta += "------------------|Comando login|------------------\nParametros:\n"
 				//Analizar Comando Login
 				respuesta += analizarLogin(&comandoSeparado)
 				//Pasar a string el comando separado
@@ -102,12 +105,14 @@ func AnalizarComando(comando string) string {
 				return respuesta
 
 			} else if valor == "rep" {
+				fmt.Println("")
 				fmt.Println("------------------|Comando rep|------------------")
 				respuesta += "------------------|Comando rep|------------------\n\n"
 				//Analizar Comando Rep
 				respuesta += analizarRep(&comandoSeparado)
 				//Pasar a string el comando separado
 				comandoSeparadoString := strings.Join(comandoSeparado, " ")
+				fmt.Println("")
 				respuesta += AnalizarComando(comandoSeparadoString)
 				return respuesta
 
@@ -121,7 +126,8 @@ func AnalizarComando(comando string) string {
 				continue
 			} else {
 				//Si no es ningun comando, entonces es un error
-				fmt.Println("Error: Comando no reconocido")
+				fmt.Println("error en:-" + valor + "-")
+				fmt.Println("Error: Comando no reconocido consola")
 				respuesta += "Error: Comando no reconocido\n"
 			}
 		}
@@ -258,7 +264,7 @@ func AnalizarMkdisk(comando *[]string) string {
 		respuesta += CrearDiscos(sizeInt, valorUnit, valorFit, valorPath)
 		return respuesta
 	}
-	
+
 }
 
 // AnalizarFdisk recibe un comando fdisk y lo analiza
@@ -412,7 +418,7 @@ func AnalizarFdisk(comando *[]string) string {
 		respuesta += "Path: " + valorPath + "\n"
 		respuesta += "Name: " + valorName + "\n"
 		respuesta += "Type: " + valorTypePart + "\n\n"
-	
+
 		//Llamar a la funcion para crear la particion
 		respuesta += Fdisk(sizeInt, valorUnit, valorFit, valorPath, valorName, valorTypePart)
 		return respuesta
@@ -599,13 +605,13 @@ func analizarLogin(comandoSeparado *[]string) string {
 	//Verificar si se ingresaron los parametros obligatorios
 	if !banderaUser {
 		fmt.Println("El parametro -user es obligatorio")
-		respuesta += "\nEl parametro -user es obligatorio\n"	
+		respuesta += "\nEl parametro -user es obligatorio\n"
 	}
 	if !banderaPass {
 		fmt.Println("El parametro -pass es obligatorio")
 		respuesta += "\nEl parametro -pass es obligatorio\n"
-	}	
-	if !banderaId {	
+	}
+	if !banderaId {
 		fmt.Println("El parametro -id es obligatorio")
 		respuesta += "\nEl parametro -id es obligatorio\n"
 	} else {
@@ -613,9 +619,9 @@ func analizarLogin(comandoSeparado *[]string) string {
 		fmt.Println("User: ", userValor)
 		fmt.Println("Pass: ", passValor)
 		fmt.Println("Id: ", idValor)
-		respuesta += "User: "+userValor+"\n"
-		respuesta += "Pass: "+passValor+"\n"
-		respuesta += "Id: "+idValor+ "\n"
+		respuesta += "User: " + userValor + "\n"
+		respuesta += "Pass: " + passValor + "\n"
+		respuesta += "Id: " + idValor + "\n"
 		//Llamar a la funcion para montar la particion
 
 		respuesta += Login(userValor, passValor, idValor)
@@ -624,7 +630,7 @@ func analizarLogin(comandoSeparado *[]string) string {
 }
 
 func analizarRep(comandoSeparado *[]string) string {
-	//rep -id=A118 -path=/home/user/reports/report2.jpg -name=disk	
+	//rep -id=A118 -path=/home/user/reports/report2.jpg -name=disk
 	//respuesta
 	var respuesta string
 	*comandoSeparado = (*comandoSeparado)[1:]
@@ -640,7 +646,7 @@ func analizarRep(comandoSeparado *[]string) string {
 			banderaId = true
 			idValor = banderaValor
 			*comandoSeparado = (*comandoSeparado)[1:]
-		} else if bandera == "-path" {	
+		} else if bandera == "-path" {
 			banderaPath = true
 			pathValor = banderaValor
 			*comandoSeparado = (*comandoSeparado)[1:]
@@ -649,7 +655,7 @@ func analizarRep(comandoSeparado *[]string) string {
 			nameValor = banderaValor
 			nameValor = strings.ToLower(nameValor)
 			*comandoSeparado = (*comandoSeparado)[1:]
-		} else if  bandera == "-ruta" {
+		} else if bandera == "-ruta" {
 			banderaRuta = true
 			rutaValor = banderaValor
 			*comandoSeparado = (*comandoSeparado)[1:]
@@ -677,7 +683,7 @@ func analizarRep(comandoSeparado *[]string) string {
 		fmt.Println("El parametro -ruta es obligatorio cuando -name es 'file' o 'ls'")
 		respuesta += "El parametro -ruta es obligatorio cuando -name es 'file' o 'ls'\n"
 	}
-	
+
 	// Procesar comando si todo es correcto
 	if len(respuesta) == 0 { // Si no hay errores
 		fmt.Println("Id: ", idValor)
@@ -700,7 +706,6 @@ func analizarRep(comandoSeparado *[]string) string {
 	}
 	return respuesta
 }
-
 
 func obtenerBandera(bandera string) string {
 	//-size
@@ -729,3 +734,53 @@ func obtenerValor(bandera string) string {
 	return banderaValor
 }
 
+func AnalizarRmdisk(comando *[]string) string {
+	var respuesta string
+	// Eliminar el primer valor del comando
+	*comando = (*comando)[1:]
+	// Variables para guardar el valor del path
+	var path string
+	var pathSet bool
+
+	// Iterar sobre el comando separado
+	for _, valor := range *comando {
+		bandera := obtenerBandera(valor)
+		banderaValor := obtenerValor(valor)
+		if bandera == "-path" {
+			path = banderaValor
+			// Verificar si el path tiene comillas
+			if strings.Contains(path, "\"") {
+				// Eliminar las comillas del inicio y del final
+				path = strings.Replace(path, "\"", "", -1)
+			}
+			pathSet = true
+		} else {
+			fmt.Println("Error: Parametro no reconocido")
+			respuesta += "\nError: Parametro no reconocido\n"
+		}
+	}
+
+	// Verificar si se ingresaron los parámetros obligatorios
+	if !pathSet {
+		fmt.Println("Error: Falta el parametro path")
+		respuesta += "\nError: Falta el parametro path\n"
+		return respuesta
+	}
+
+	// Imprimir los valores de los parámetros
+	fmt.Println("Path: " + path)
+	respuesta += "Parametros:\n"
+	respuesta += "Path: " + path + "\n\n"
+
+	// Llamar a la función para eliminar el disco
+	err := os.Remove(path)
+	if err != nil {
+		fmt.Println("Error: No se pudo eliminar el disco")
+		respuesta += "\nError: No se pudo eliminar el disco PORQUE NO EXISTE\n"
+		return respuesta
+	}
+
+	fmt.Println("Disco eliminado correctamente")
+	respuesta += "Disco eliminado correctamente\n"
+	return respuesta
+}

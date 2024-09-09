@@ -1,0 +1,22 @@
+digraph grid {bgcolor="slategrey" label=" Reporte SuperBlock "layout=dot labelloc = "t"edge [weigth=1000 style=dashed color=red4 dir = "both" arrowtail="open" arrowhead="open"]a0[shape=none, color=lightgrey, label=<
+<TABLE cellspacing="3" cellpadding="2" style="rounded" >
+<TR><TD bgcolor="lightgrey">Disco</TD><TD>/home/antares/Desktop/Archivos/MIA_2S_P1_201807124/Proyecto1/Discos/Disco3.mia</TD></TR>
+<TR><TD bgcolor="lightgrey">s_filesystem_type</TD><TD>2</TD></TR>
+<TR><TD bgcolor="lightgrey">s_inodes_count</TD><TD>2115</TD></TR>
+<TR><TD bgcolor="lightgrey">s_blocks_count</TD><TD>6345</TD></TR>
+<TR><TD bgcolor="lightgrey">s_free_blocks_count</TD><TD>6343</TD></TR>
+<TR><TD bgcolor="lightgrey">s_free_inodes_count</TD><TD>2113</TD></TR>
+<TR><TD bgcolor="lightgrey">s_mtime</TD><TD>2024-09-09 14:58:55</TD></TR>
+<TR><TD bgcolor="lightgrey">s_umtime</TD><TD>2024-09-09 14:58:55</TD></TR>
+<TR><TD bgcolor="lightgrey">s_mnt_count</TD><TD>1</TD></TR>
+<TR><TD bgcolor="lightgrey">s_magic</TD><TD>61267</TD></TR>
+<TR><TD bgcolor="lightgrey">s_inode_size</TD><TD>138</TD></TR>
+<TR><TD bgcolor="lightgrey">s_block_size</TD><TD>64</TD></TR>
+<TR><TD bgcolor="lightgrey">s_first_ino</TD><TD>0</TD></TR>
+<TR><TD bgcolor="lightgrey">s_first_blo</TD><TD>0</TD></TR>
+<TR><TD bgcolor="lightgrey">s_bm_inode_start</TD><TD>267</TD></TR>
+<TR><TD bgcolor="lightgrey">s_bm_block_start</TD><TD>2382</TD></TR>
+<TR><TD bgcolor="lightgrey">s_inode_start</TD><TD>8727</TD></TR>
+<TR><TD bgcolor="lightgrey">s_block_start</TD><TD>300597</TD></TR>
+</TABLE>>];
+}

@@ -9,6 +9,7 @@ type Mount struct {
 	Size      int32
 }
 
+
 type usuarioActual struct {
 	Uid int32
 	Gid int32
@@ -21,6 +22,7 @@ type usuarioActual struct {
 func NuevoUsuarioActual() usuarioActual {
 	return usuarioActual{-1, -1, "", "", "", ""}
 }
+
 
 var particionesMontadas []Mount
 

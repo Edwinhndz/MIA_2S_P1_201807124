@@ -405,7 +405,7 @@ func MountPartition(pathValor string, name string) string {
 
 		letra := alfabeto[len(pathsParticiones)-1]
 
-		particionMontada.Id = "50" + strconv.Itoa(contador) + string(letra)
+		particionMontada.Id = "24" + strconv.Itoa(contador) + string(letra)
 		particionMontada.Size = particion.Part_size
 		particionMontada.Start = particion.Part_start
 		particionesMontadas = append(particionesMontadas, particionMontada)
@@ -463,7 +463,7 @@ func MountPartition(pathValor string, name string) string {
 
 		letra := alfabeto[len(pathsParticiones)-1]
 
-		particionMontada.Id = "50" + strconv.Itoa(contador) + string(letra)
+		particionMontada.Id = "24" + strconv.Itoa(contador) + string(letra)
 		particionMontada.Size = particion.Part_size
 		particionMontada.Start = particion.Part_start
 		particionesMontadas = append(particionesMontadas, particionMontada)
@@ -520,7 +520,7 @@ func MountPartition(pathValor string, name string) string {
 
 		letra := alfabeto[len(pathsParticiones)-1]
 
-		particionMontada.Id = "50" + strconv.Itoa(contador) + string(letra)
+		particionMontada.Id = "24" + strconv.Itoa(contador) + string(letra)
 		particionMontada.Size = particion.Part_size
 		particionMontada.Start = particion.Part_start
 		particionesMontadas = append(particionesMontadas, particionMontada)

@@ -1,8 +1,6 @@
 package filesystem
 
-import (
-	"encoding/binary"
-)
+import "encoding/binary"
 
 type Partition struct {
 	Part_status      [1]byte
