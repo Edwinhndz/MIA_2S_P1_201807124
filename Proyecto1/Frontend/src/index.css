@@ -1,6 +1,6 @@
 /* Estilos generales del body */
 body {
-  background-color: #2e0000; /* Color de fondo claro */
+  background-color: #7a82c7; /* Color de fondo claro */
   color: #212529; /* Color de texto oscuro */
   font-family: 'Inter', sans-serif;
 }
@@ -13,7 +13,7 @@ h1 {
 
 /* Estilos para los contenedores de las tarjetas */
 .card {
-  background-color: #095369; /* Fondo oscuro para las tarjetas */
+  background-color: #090f69; /* Fondo oscuro para las tarjetas */
   color: #fff; /* Color del texto blanco */
   border-radius: 30px; /* Bordes redondeados */
   padding: 20px; /* Espaciado interno */
@@ -24,24 +24,24 @@ h1 {
 .btn {
   font-size: 1rem; /* Tamaño del texto */
   padding: 10px 50px; /* Espaciado interno */
-  border-radius: 10px; /* Bordes redondeados */
+  border-radius: 10px; /* Bordes redondeados */ 
   border: none; /* Sin borde por defecto */
   transition: background-color 0.3s, border-color 0.3s; /* Transiciones suaves */
 }
 
 /* Botón primario */
 .btn-primary {
-  background-color: #095369; /* Color de fondo azul */
+  background-color: #124118; /* Color de fondo azul */
   color: #fff; /* Color del texto blanco */
 }
 
 .btn-primary:hover {
-  background-color: #2b2e31; /* Color de fondo más oscuro en hover */
+  background-color: #7e7f80; /* Color de fondo más oscuro en hover */
 }
 
 /* Botón secundario */
 .btn-secondary {
-  background-color: #095369; /* Color de fondo gris */
+  background-color: #642727; /* Color de fondo gris */
   color: #fff; /* Color del texto blanco */
 }
 

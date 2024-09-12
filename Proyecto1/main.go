@@ -96,7 +96,7 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	// Endpoints
 	router.HandleFunc("/", indexRoute)
-	router.HandleFunc("/Blanco", getTasks).Methods("GET")
+	router.HandleFunc("/Edwin", getTasks).Methods("GET")
 	router.HandleFunc("/command", leerComando).Methods("POST")
 
 	headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})

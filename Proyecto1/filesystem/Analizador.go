@@ -697,11 +697,17 @@ func analizarRep(comandoSeparado *[]string) string {
 		respuesta += "Name: " + nameValor + "\n"
 		respuesta += "Ruta: " + rutaValor + "\n\n"
 		if nameValor == "tree" {
+			fmt.Println("Generando reporte de árbol")
 			RepTree(idValor, pathValor)
 		} else if nameValor == "disk" {
+			fmt.Println("Generando reporte de disco")
 			ReporteDisk(idValor, pathValor)
 		} else if nameValor == "sb" {
+			fmt.Println("Generando reporte de superbloque")
 			ReporteSB(idValor, pathValor)
+		} else if nameValor == "inode" {
+			fmt.Println("Generando reporte de inodo")
+			//RecursivoTree(idValor, pathValor)
 		}
 	}
 	return respuesta
