@@ -1,0 +1,2 @@
+digraph G {bgcolor="slategrey" label="Reporte MBR" layout=dot labelloc = "t" edge [weight=1000 style=dashed color=red4 dir = "both" arrowtail="open" arrowhead="open"] node[shape=record, color=lightgrey] nodoMBR[label="MBR | { mbr_tamanio | 3072000 } |{ mbr_fecha_creacion | 2024-09-13 13:27:03 } |{ mbr_disk_signature | 8 } || { Particion 1 | { part_status | 1 } |{ part_type | p } |{ part_fit | f } |{ part_start | 169 } |{ part_size | 706560 } |{ part_name | Particion8 } }"];
+}

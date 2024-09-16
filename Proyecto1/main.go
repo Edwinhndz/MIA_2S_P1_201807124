@@ -90,6 +90,23 @@ func indexRoute(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Bienvenido a mi servidor")
 }
 
+func leerComand(w http.ResponseWriter, r *http.Request) {
+	var newComando Comando
+	var newRespuesta Respuesta
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprintf(w, "Inserte un comando valido")
+		newRespuesta.ResponseBack = "Inserte un comando valido"
+	}
+	json.Unmarshal(reqBody, &newComando)
+	newRespuesta.ResponseBack = filesystem.DividirComando(newComando.Comando)
+	fmt.Println(newRespuesta.ResponseBack)
+	//Agregar la respuesta a la peticion
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(newRespuesta)
+}
+
 func main() {
 	// Rutas
 	fmt.Println("MIA Edwin Lopez")
@@ -97,7 +114,7 @@ func main() {
 	// Endpoints
 	router.HandleFunc("/", indexRoute)
 	router.HandleFunc("/Edwin", getTasks).Methods("GET")
-	router.HandleFunc("/command", leerComando).Methods("POST")
+	router.HandleFunc("/command", leerComand).Methods("POST")
 
 	headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
 	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"})

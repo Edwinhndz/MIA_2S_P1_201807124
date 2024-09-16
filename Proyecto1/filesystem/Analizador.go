@@ -708,7 +708,39 @@ func analizarRep(comandoSeparado *[]string) string {
 		} else if nameValor == "inode" {
 			fmt.Println("Generando reporte de inodo")
 			//RecursivoTree(idValor, pathValor)
+		} else if nameValor == "mbr" {
+			//Imprimir los valores y ejecutar el comando
+			fmt.Println("id: ", idValor)
+			fmt.Println("name: ", nameValor)
+			fmt.Println("path: ", pathValor)
+			//Ejecutar el comando
+			respuesta += ReporteMBR(idValor, pathValor)
+		} else if nameValor == "bm_inode" {
+			respuesta += ReporteBMInode(idValor, pathValor)
+		} else if nameValor == "bm_block" {
+			respuesta += ReporteBMBlock(idValor, pathValor)
 		}
+	}
+	return respuesta
+}
+
+func AnalizarComand(comando string) string {
+	var respuesta string
+	//se divide el comando en un arreglo de strings por el espacio
+	comandoSeparado := strings.Split(comando, " ")
+	//Si encuentra el # en la posicion 0, es un comentario
+	if strings.Contains(comandoSeparado[0], "#") {
+		//imprime el comentario
+		fmt.Println("Comentario: ")
+		//Eliminiar el #
+		comandoSeparado[0] = strings.Replace(comandoSeparado[0], "#", "", -1)
+		respuesta += " "
+		//se recorre el arreglo de strings
+		for i := 0; i < len(comandoSeparado); i++ {
+			respuesta += comandoSeparado[i] + " "
+		}
+		respuesta += "\n"
+		fmt.Println(respuesta)
 	}
 	return respuesta
 }
