@@ -10,7 +10,7 @@ function Index() {
 
     const changeText = (text) => {
         console.log("Texto recibido en changeText:", text); // Verifica si se está actualizando correctamente
-    
+
         setValue(text);
     };
 
@@ -62,29 +62,36 @@ function Index() {
             <NavBar />
             <div className="container mt-4">
                 <h1 className="text-center mb-4">PROYECTO 1</h1>
-                <div className="card p-4 mb-4">
-                    <Consola 
-                        text="CONSOLA DE ENTRADA" 
-                        handlerChange={changeText} 
-                        value={value} 
-                        className="form-control mb-3"
-                    />
+
+                {/* Contenedor que envuelve ambas tarjetas */}
+                <div className="d-flex justify-content-between">
+                    <div className="card p-4 mb-4 me-2 w-50">
+                        <Consola
+                            text="CONSOLA DE ENTRADA"
+                            handlerChange={changeText}
+                            value={value}
+                            className="form-control mb-3"
+                        />
+                    </div>
+
+                    <div className="card p-4 mb-4 ms-2 w-50">
+                        <Consola
+                            text="CONSOLA DE SALIDA"
+                            handlerChange={changeText}
+                            value={response}
+                            readOnly={false}
+                            className="form-control"
+                        />
+                    </div>
                 </div>
+                
                 <div className="d-flex justify-content-around my-3">
                     <button type="button" className="btn btn-primary" onClick={handlerClick}>Enviar</button>
                     <button type="button" className="btn btn-secondary" onClick={handlerLimpiar}>Limpiar</button>
                     <button type="button" className="btn btn-success" onClick={handleLoadClick}>Cargar</button>
                 </div>
-                <div className="card p-4">
-                    <Consola 
-                        text="CONSOLA DE SALIDA" 
-                        handlerChange={changeText} 
-                        value={response} 
-                        readOnly={false} 
-                        className="form-control"
-                    />
-                </div>
             </div>
+
         </>
     );
 }

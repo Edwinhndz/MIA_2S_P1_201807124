@@ -279,11 +279,12 @@ func ReporteDisk(idValor string, pathValor string) {
 		Dot += "\\n" + fmt.Sprintf("%.2f", porcentaje) + "%\\n"
 	}
 	Dot += "\"];\n}"
+	fmt.Println(Dot)
 
 	//Quitar la extension al archivo (pdf, etc, )
 
 	//Crear el archivo .dot
-	DotName := "Reportes/ReporteDisk.dot"
+	DotName := "Reportes/" + fileName + ".dot"
 	archivoDot, err := os.Create(DotName)
 	if err != nil {
 		fmt.Println("Error al crear el archivo .dot: ", err)
@@ -296,7 +297,7 @@ func ReporteDisk(idValor string, pathValor string) {
 		return
 	}
 	//Generar la imagen
-	cmd := exec.Command("dot", "-T", "png", DotName, "-o", "Reportes/ReporteDisk.png")
+	cmd := exec.Command("dot", "-T", "png", DotName, "-o", "Reportes/"+fileName)
 	err = cmd.Run()
 	if err != nil {
 		fmt.Println("Error al generar la imagen: ", err)
@@ -671,7 +672,7 @@ func ReporteMBR(id string, pathValor string) string {
 		return respuesta
 	}
 
-	return "Reporte MBR creado con éxito\n"
+	return "Reporte MBR creado con éxito!\n"
 }
 
 // Función para obtener una partición del MBR según el índice

@@ -1,75 +1,88 @@
 /* Estilos generales del body */
 body {
-  background-color: #7a82c7; /* Color de fondo claro */
-  color: #212529; /* Color de texto oscuro */
-  font-family: 'Inter', sans-serif;
+  background-color: #6a75b5; /* Color de fondo ligeramente más oscuro */
+  color: #1c1e22; /* Color de texto un poco más oscuro */
+  font-family: 'Poppins', sans-serif; /* Cambio de tipografía */
 }
 
 /* Estilos del h1 */
 h1 {
-  font-size: 2.5rem; /* Tamaño del texto */
-  color: #ffffff; /* Color oscuro */
+  font-size: 2.75rem; /* Aumentado ligeramente el tamaño del texto */
+  color: #f1f1f1; /* Color más claro para el título */
+  letter-spacing: 1px; /* Espaciado de letras para mejorar la legibilidad */
 }
 
 /* Estilos para los contenedores de las tarjetas */
 .card {
-  background-color: #090f69; /* Fondo oscuro para las tarjetas */
-  color: #fff; /* Color del texto blanco */
-  border-radius: 30px; /* Bordes redondeados */
-  padding: 20px; /* Espaciado interno */
-  margin-bottom: 20px; /* Espaciado externo inferior */
+  background-color: #101540; /* Fondo un poco más claro para las tarjetas */
+  color: #e8e8e8; /* Color del texto ligeramente gris */
+  border-radius: 25px; /* Bordes ligeramente menos redondeados */
+  padding: 25px; /* Espaciado interno mayor */
+  margin-bottom: 25px; /* Aumentado el espaciado externo inferior */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra para más profundidad */
 }
 
 /* Estilos para los botones */
 .btn {
-  font-size: 1rem; /* Tamaño del texto */
-  padding: 10px 50px; /* Espaciado interno */
-  border-radius: 10px; /* Bordes redondeados */ 
-  border: none; /* Sin borde por defecto */
-  transition: background-color 0.3s, border-color 0.3s; /* Transiciones suaves */
+  font-size: 1.1rem; /* Tamaño de texto ligeramente mayor */
+  padding: 12px 45px; /* Espaciado ajustado */
+  border-radius: 8px; /* Bordes menos redondeados */
+  border: 2px solid transparent; /* Agregado un borde invisible por defecto */
+  transition: background-color 0.2s, border-color 0.2s; /* Transición más rápida */
 }
 
 /* Botón primario */
 .btn-primary {
-  background-color: #124118; /* Color de fondo azul */
-  color: #fff; /* Color del texto blanco */
+  background-color: #0e5b21; /* Color de fondo verde oscuro */
+  color: #f0f0f0; /* Color del texto más claro */
+  border-color: #0c4a1b; /* Borde acorde con el fondo */
 }
 
 .btn-primary:hover {
-  background-color: #7e7f80; /* Color de fondo más oscuro en hover */
+  background-color: #6b6d6f; /* Color de fondo más neutro en hover */
+  border-color: #525457; /* Borde más oscuro en hover */
 }
 
 /* Botón secundario */
 .btn-secondary {
-  background-color: #642727; /* Color de fondo gris */
-  color: #fff; /* Color del texto blanco */
+  background-color: #783232; /* Color de fondo rojo oscuro */
+  color: #f7f7f7; /* Color del texto más claro */
+  border-color: #652a2a; /* Borde acorde con el fondo */
 }
 
 .btn-secondary:hover {
-  background-color: #2b2e31; /* Color de fondo más oscuro en hover */
+  background-color: #393d40; /* Color de fondo más neutro en hover */
+  border-color: #282a2d; /* Borde más oscuro en hover */
 }
 
 /* Botón exitoso */
 .btn-success {
-  background-color: #095369; /* Color de fondo verde */
-  color: #fff; /* Color del texto blanco */
+  background-color: #096581; /* Color de fondo azul marino */
+  color: #e4e4e4; /* Color del texto más claro */
+  border-color: #084d63; /* Borde acorde con el fondo */
 }
 
 .btn-success:hover {
-  background-color: #2b2e31; /* Color de fondo más oscuro en hover */
+  background-color: #383d40; /* Color de fondo más oscuro en hover */
+  border-color: #2a2d30; /* Borde más oscuro en hover */
 }
 
 /* Botón peligroso */
 .btn-danger {
-  background-color: #dc3545; /* Color de fondo rojo */
-  color: #fff; /* Color del texto blanco */
+  background-color: #e63946; /* Color de fondo rojo más vivo */
+  color: #fafafa; /* Color del texto más claro */
+  border-color: #d02638; /* Borde acorde con el fondo */
 }
 
 .btn-danger:hover {
-  background-color: #c82333; /* Color de fondo más oscuro en hover */
+  background-color: #c11226; /* Color de fondo más oscuro en hover */
+  border-color: #a60f21; /* Borde más oscuro en hover */
 }
 
 /* Estilos específicos del editor */
 .editor-react {
   margin: 0 auto; /* Centra el editor */
+  max-width: 1200px; /* Establecido un ancho máximo */
+  width: 1200vh; /* Establecido un ancho máximo */
+  height: 50vh;
 }

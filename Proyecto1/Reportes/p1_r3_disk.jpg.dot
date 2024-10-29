@@ -1,0 +1,2 @@
+digraph grid {bgcolor="slategrey" label=" Reporte Disk "layout=dot labelloc = "t"edge [weigth=1000 style=dashed color=red4 dir = "both" arrowtail="open" arrowhead="open"]node[shape=record, color=lightgrey]a0[label="MBR|Primaria\n30.77%\n|Primaria\n30.77%\n|Primaria\n7.69%\n|Libre\n30.77%\n"];
+}

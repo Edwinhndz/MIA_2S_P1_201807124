@@ -121,6 +121,6 @@ func main() {
 	origins := handlers.AllowedOrigins([]string{"*"})
 
 	// Servidor
-	fmt.Println("Servidor corriendo en el puerto http://localhost:3000")
+	fmt.Println("Servidor corriendo en el puerto http://52.90.27.49:3000")
 	http.ListenAndServe(":3000", handlers.CORS(headers, methods, origins)(router))
 }

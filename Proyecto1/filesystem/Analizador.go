@@ -30,10 +30,10 @@ func AnalizarComando(comando string) string {
 	//Si encuentra el # en la posicion 0, es un comentario
 	if strings.Contains(comandoSeparado[0], "#") {
 		//imprime el comentario
-		fmt.Println("Comentario: ")
+		fmt.Println("\nComentario: ")
 		//Eliminiar el #
 		comandoSeparado[0] = strings.Replace(comandoSeparado[0], "#", "", -1)
-		respuesta += "Comentario: "
+		respuesta += "\nComentario: "
 		//se recorre el arreglo de strings
 		for i := 0; i < len(comandoSeparado); i++ {
 			respuesta += comandoSeparado[i] + " "
@@ -48,8 +48,8 @@ func AnalizarComando(comando string) string {
 			valor = strings.ToLower(valor)
 			//Si el valor es mkdisk, entonces es un comando para crear un disco
 			if valor == "mkdisk" {
-				fmt.Println("------------------|Comando mkdisk|------------------")
-				respuesta += "------------------|Comando mkdisk|------------------\n"
+				fmt.Println("\n------------------|Comando mkdisk|------------------")
+				respuesta += "\n------------------|Comando mkdisk|------------------\n"
 				//Analizar el comando mkdisk
 				respuesta += AnalizarMkdisk(&comandoSeparado)
 				//Pasar a string el comando separado
@@ -58,8 +58,8 @@ func AnalizarComando(comando string) string {
 				return respuesta
 			} else if valor == "rmdisk" {
 
-				fmt.Println("------------------|Comando rmdisk|------------------")
-				respuesta += "------------------|Comando rmdisk|------------------\n"
+				fmt.Println("\n------------------|Comando rmdisk|------------------")
+				respuesta += "\n------------------|Comando rmdisk|------------------\n"
 				//Analizar el comando rmdisk
 				respuesta += AnalizarRmdisk(&comandoSeparado)
 				//Pasar a string el comando separado
@@ -68,8 +68,8 @@ func AnalizarComando(comando string) string {
 				return respuesta
 
 			} else if valor == "fdisk" {
-				fmt.Println("------------------|Comando fdisk|------------------")
-				respuesta += "------------------|Comando fdisk|------------------\n"
+				fmt.Println("\n------------------|Comando fdisk|------------------")
+				respuesta += "\n------------------|Comando fdisk|------------------\n"
 				//Analizar el comando fdisk
 				respuesta += AnalizarFdisk(&comandoSeparado)
 				//Pasar a string el comando separado
@@ -77,8 +77,8 @@ func AnalizarComando(comando string) string {
 				respuesta += AnalizarComando(comandoSeparadoString)
 				return respuesta
 			} else if valor == "mount" {
-				fmt.Println("------------------|Comando mount|------------------")
-				respuesta += "------------------|Comando mount|------------------\nParametros:\n"
+				fmt.Println("\n------------------|Comando mount|------------------")
+				respuesta += "\n------------------|Comando mount|------------------\nParametros:\n"
 				//Analizar Comando Mount
 				respuesta += analizarMount(&comandoSeparado)
 				//Pasar a string el comando separado
@@ -86,8 +86,8 @@ func AnalizarComando(comando string) string {
 				respuesta += AnalizarComando(comandoSeparadoString)
 				return respuesta
 			} else if valor == "mkfs" {
-				fmt.Println("------------------|Comando mkfs|------------------")
-				respuesta += "------------------|Comando mkfs|------------------\nParametros:\n"
+				fmt.Println("\n------------------|Comando mkfs|------------------")
+				respuesta += "\n------------------|Comando mkfs|------------------\nParametros:\n"
 				//Analizar Comando Mkfs
 				respuesta += analizarMkfs(&comandoSeparado)
 				//Pasar a string el comando separado
@@ -95,8 +95,8 @@ func AnalizarComando(comando string) string {
 				respuesta += AnalizarComando(comandoSeparadoString)
 				return respuesta
 			} else if valor == "login" {
-				fmt.Println("------------------|Comando login|------------------")
-				respuesta += "------------------|Comando login|------------------\nParametros:\n"
+				fmt.Println("\n------------------|Comando login|------------------")
+				respuesta += "\n------------------|Comando login|------------------\nParametros:\n"
 				//Analizar Comando Login
 				respuesta += analizarLogin(&comandoSeparado)
 				//Pasar a string el comando separado
@@ -106,8 +106,8 @@ func AnalizarComando(comando string) string {
 
 			} else if valor == "rep" {
 				fmt.Println("")
-				fmt.Println("------------------|Comando rep|------------------")
-				respuesta += "------------------|Comando rep|------------------\n\n"
+				fmt.Println("\n------------------|Comando rep|------------------")
+				respuesta += "\n------------------|Comando rep|------------------\n\n"
 				//Analizar Comando Rep
 				respuesta += analizarRep(&comandoSeparado)
 				//Pasar a string el comando separado
@@ -115,6 +115,26 @@ func AnalizarComando(comando string) string {
 				fmt.Println("")
 				respuesta += AnalizarComando(comandoSeparadoString)
 				return respuesta
+			} else if valor == "cat" {
+				fmt.Println("\n------------------|Comando cat|------------------")
+				respuesta += "\n------------------|Comando cat|------------------\n"
+				// Analizar comando cat
+				fmt.Println("Comando cat")
+				for _, param := range comandoSeparado {
+					if strings.HasPrefix(param, "-file=") {
+						filePath := strings.TrimPrefix(param, "-file=")
+						respuesta += Cat(filePath, "")
+						fmt.Println("EJECUTANDO CAT")
+					}
+				}
+				respuesta += "Fin CAT" + "\n"
+				return respuesta
+			} else if valor == "logout" {
+				fmt.Println("\n------------------|Comando logout|------------------")
+				respuesta += "\n------------------|Comando logout|------------------\n"
+				// Analizar comando logout
+
+				respuesta += Logout() + "\n"
 
 			} else if valor == "\n" {
 				continue
@@ -696,10 +716,7 @@ func analizarRep(comandoSeparado *[]string) string {
 		respuesta += "Path: " + pathValor + "\n"
 		respuesta += "Name: " + nameValor + "\n"
 		respuesta += "Ruta: " + rutaValor + "\n\n"
-		if nameValor == "tree" {
-			fmt.Println("Generando reporte de árbol")
-			RepTree(idValor, pathValor)
-		} else if nameValor == "disk" {
+		if nameValor == "disk" {
 			fmt.Println("Generando reporte de disco")
 			ReporteDisk(idValor, pathValor)
 		} else if nameValor == "sb" {
@@ -716,8 +733,10 @@ func analizarRep(comandoSeparado *[]string) string {
 			//Ejecutar el comando
 			respuesta += ReporteMBR(idValor, pathValor)
 		} else if nameValor == "bm_inode" {
+			fmt.Println("Generando reporte de bitmap de inodos")
 			respuesta += ReporteBMInode(idValor, pathValor)
 		} else if nameValor == "bm_block" {
+			fmt.Println("Generando reporte de bitmap de bloques")
 			respuesta += ReporteBMBlock(idValor, pathValor)
 		}
 	}

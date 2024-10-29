@@ -17,12 +17,14 @@ func Login(userValor string, passValor string, idValor string) string {
 	indice := VerificarParticionMontada(idValor)
 	if indice == -1 {
 		println("La partición no está montada")
+		respuesta += "\nLa partición no está montada"
 		return respuesta
 	}
 	fmt.Println("Partición montada encontrada en el índice:", indice)
 
 	if Usr_sesion.Uid != -1 {
 		println("Ya hay una sesión iniciada")
+		respuesta += "\nYa hay una sesión iniciada"
 		return respuesta
 	}
 
@@ -106,6 +108,7 @@ func Login(userValor string, passValor string, idValor string) string {
 			}
 		}
 	}
+
 	fmt.Println("Sesión iniciada con éxito en la partición:", idValor, "con el usuario:", userValor)
 	return respuesta
 }
@@ -224,6 +227,94 @@ func ObtenerContenido(contenido string, size int) string {
 	}
 	fmt.Println("Contenido final obtenido:", contenidoFinal)
 	return contenidoFinal
+}
+func Cat(valorFile string, ValorPath string) string {
+	var respuesta string
+	if Usr_sesion.Uid == -1 {
+		respuesta += "No hay una sesion activa\n"
+		return respuesta
+	}
+	// Verificar que el id exista en la lista de particiones montadas
+	indice := VerificarParticionMontada(Usr_sesion.Pid)
+	if indice == -1 {
+		respuesta += "La partición no está montada\n"
+		return respuesta
+	}
+	fmt.Println("Partición montada encontrada en el índice:", indice)
+
+	MountActual := particionesMontadas[indice]
+	SuperBlock := NewSuperBlock()
+
+	// Leer el superbloque
+	file, err := os.OpenFile(MountActual.Path, os.O_RDWR, 0777)
+	if err != nil {
+		respuesta += "Error al leer el disco: " + err.Error() + "\n"
+		respuesta += "Finalizacion"
+		return respuesta
+	}
+	defer file.Close()
+
+	// Leer el superbloque
+	file.Seek(int64(MountActual.Start), 0)
+	err = binary.Read(file, binary.LittleEndian, &SuperBlock)
+	if err != nil {
+		respuesta += "Error al leer el superbloque: " + err.Error() + "\n"
+		return respuesta
+	}
+	fmt.Printf("Leyendo S_filesystem_type: %d\n", SuperBlock.S_filesystem_type)
+
+	// Verificar que el sistema de archivos sea 2fs o 3fs
+	if !(SuperBlock.S_filesystem_type == 2 || SuperBlock.S_filesystem_type == 3) {
+		respuesta += "El sistema de archivos no es 2fs ni 3fs o no está formateado\n"
+		return respuesta
+	}
+	fmt.Println("Sistema de archivos válido:", SuperBlock.S_filesystem_type)
+
+	// Verificar que el archivo exista
+	numeroInodo := BuscarInodo(valorFile, MountActual, SuperBlock, file)
+	if numeroInodo == -1 {
+		respuesta += "No se encontró el archivo " + valorFile + "\n"
+		return respuesta
+	}
+	fmt.Println("Archivo encontrado con número de inodo:", numeroInodo)
+
+	// Leer el archivo
+	contenido := LeerArchivo(numeroInodo, SuperBlock, file)
+	if contenido == "" {
+		respuesta += "No se pudo leer el archivo " + valorFile + "\n"
+		return respuesta
+	}
+	fmt.Println("Contenido del archivo", contenido)
+
+	// Reemplazar saltos de línea con espacios
+	contenidoEnUnaLinea := strings.ReplaceAll(contenido, "\n", " ")
+
+	respuesta += "Contenido del archivo: [" + contenidoEnUnaLinea + "]\n\n"
+	return respuesta
+}
+
+func BuscarInodo(ruta string, MountActual Mount, superBloque SuperBlock, archivo *os.File) int {
+	pathSplit := strings.Split(ruta, "/")
+	var newPath []string
+	for _, s := range pathSplit {
+		if s != "" {
+			newPath = append(newPath, s)
+		}
+	}
+
+	pathSplit = newPath
+	//Leer el inodo raíz
+	inodoRaiz := NewInodes()
+	archivo.Seek(int64(superBloque.S_inode_start), 0)
+	err := binary.Read(archivo, binary.LittleEndian, &inodoRaiz)
+	if err != nil {
+		fmt.Println("Error al leer el inodo raíz")
+		return -1
+	}
+
+	//Buscar el numero de inodo del archivo
+	numeroInodo := BuscarIndiceInodo(inodoRaiz, pathSplit, superBloque, archivo)
+	return numeroInodo
 }
 
 func Logout() string {
